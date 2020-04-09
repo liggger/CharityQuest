@@ -7,9 +7,11 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "awesome": "0.0.7",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.0",
+    "font": "0.0.4",
     "font-awesome": "^4.7.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.5",

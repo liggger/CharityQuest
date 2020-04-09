@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-form :rules="rules" ref="loginForm" :model="loginForm" class="loginContainer">
-            <h3 class="loginTitle">系统登录</h3>
+            <h3 class="loginTitle">Login</h3>
             <el-form-item prop="username">
                 <el-input type="text" v-model="loginForm.username" auto-complete="off" placeholder="Please enter username"></el-input>
             </el-form-item>
@@ -25,8 +25,8 @@
                 },
                 checked:true,
                 rules: {
-                    username: [{required: true, message:'请输入用户名', trigger:'blur'}],
-                    password: [{required: true, message:'请输入密码', trigger:'blur'}]
+                    username: [{required: true, message:'username', trigger:'blur'}],
+                    password: [{required: true, message:'password', trigger:'blur'}]
                 }
             }
         },

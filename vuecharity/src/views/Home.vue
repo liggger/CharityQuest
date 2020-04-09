@@ -2,26 +2,43 @@
     <div>
         <el-container>
             <el-header class="homeHeader">
-                <div class="title">微人事</div>
-                <el-dropdown class="userInfo" @command="commandHandler">
-  <span class="el-dropdown-link">
-<!--    {{user.name}}<i class="el-icon-arrow-down el-icon&#45;&#45;right"></i>-->
-    username<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item command="userInfo">user account</el-dropdown-item>
-                        <el-dropdown-item command="donationInfo">donation info</el-dropdown-item>
-                        <el-dropdown-item divided command="signOut">sign out</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
+                <div class="title">Charity Center</div>
+                <div v-if="user!=null">
+                    <el-dropdown class="userInfo" @command="userCommandHandler">
+                      <span class="el-dropdown-link user">
+                        {{user.username}}<i class="el-icon-arrow-down el-icon--right"></i>
+                      </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="userInfo">User Info</el-dropdown-item>
+                            <el-dropdown-item command="donationInfo">Donation Info</el-dropdown-item>
+                            <el-dropdown-item command="sendMessage">Send Message</el-dropdown-item>
+                            <el-dropdown-item command="sendEmail">Send Email</el-dropdown-item>
+                            <el-dropdown-item divided command="logOut">Log Out</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+                <div v-else>
+                    <el-dropdown class="userInfo" @command="visitorCommandHandler">
+                        <div>
+                            <span class="el-dropdown-link user">
+                                <span>visitor</span>
+                                <i class="el-icon-arrow-down el-icon--right"></i>
+                            </span>
+                        </div>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command="register">Register</el-dropdown-item>
+                            <el-dropdown-item command="login">Login</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
             </el-header>
 
             <el-container>
                 <el-aside width="200px">
                     <el-menu @select="menuClick">
-                        <el-menu-item index="Home">
-                            <i class="el-icon-menu"></i>
-                            <span slot="title">Home</span>
+                        <el-menu-item index="home">
+                            <i class="el-icon-location"></i>
+                            <span slot="title">home</span>
                         </el-menu-item>
 
                         <el-submenu index="2">
@@ -29,9 +46,9 @@
                                 <i class="el-icon-location"></i>
                                 <span>news</span>
                             </template>
-                            <el-menu-item index="Announcement">announcement</el-menu-item>
-                            <el-menu-item index="CharityNews">charity news</el-menu-item>
-                            <el-menu-item index="Policies">policies and regulations</el-menu-item>
+                            <el-menu-item index="announcement">announcement</el-menu-item>
+                            <el-menu-item index="charitynews">charity news</el-menu-item>
+                            <el-menu-item index="activity">Activity</el-menu-item>
                         </el-submenu>
 
                         <el-submenu index="3">
@@ -39,8 +56,8 @@
                                 <i class="el-icon-location"></i>
                                 <span>get involved</span>
                             </template>
-                            <el-menu-item index="Donate">donate</el-menu-item>
-                            <el-menu-item index="Fundraise">fundraise for us</el-menu-item>
+                            <el-menu-item index="donate">donate</el-menu-item>
+                            <el-menu-item index="fundraise">fundraise for us</el-menu-item>
                         </el-submenu>
 
                         <el-submenu index="4">
@@ -48,11 +65,11 @@
                                 <i class="el-icon-location"></i>
                                 <span>about us</span>
                             </template>
-                            <el-menu-item index="CharityInfo">our people</el-menu-item>
-                            <el-menu-item index="OurPeople">charity info</el-menu-item>
+                            <el-menu-item index="ourpeople">our people</el-menu-item>
+                            <el-menu-item index="charityInfo">charity info</el-menu-item>
                         </el-submenu>
 
-                        <el-menu-item index="Contact">
+                        <el-menu-item index="contact">
                             <i class="el-icon-setting"></i>
                             <span slot="title">contact us</span>
                         </el-menu-item>
@@ -61,8 +78,11 @@
 
                 </el-aside>
                 <el-main>
-                    <router-view/>
-                    <template>
+                    <el-breadcrumb separator-class="el-icon-arrow-right" v-if="this.$router.currentRoute.path!=='/home'" style="padding-bottom: 20px">
+                        <el-breadcrumb-item :to="{ path: '/home' }">Home</el-breadcrumb-item>
+                        <el-breadcrumb-item>{{this.$router.currentRoute.name}}</el-breadcrumb-item>
+                    </el-breadcrumb>
+                    <template v-if="this.$router.currentRoute.path==='/announcement'">
                         <el-carousel :interval="4000" type="card" height="bannerHeight+'px'">
                             <el-carousel-item v-for="item in imagesbox" :key="item.id">
                                 <el-row>
@@ -75,6 +95,10 @@
                             </el-carousel-item>
                         </el-carousel>
                     </template>
+                    <div class="homeWelcome" v-if="this.$router.currentRoute.path==='/home'">
+                        Welcome to the Charity Center!
+                    </div>
+                    <router-view/>
                 </el-main>
             </el-container>
         </el-container>
@@ -88,13 +112,13 @@
             return {
                 user: JSON.parse(window.sessionStorage.getItem("user")),
                 bannerHeight: "",
-                imagesbox: [{id: 0, idView: require("../assets/images/car (1).jpg")},
-                    {id: 1, idView: require("../assets/images/car (2).jpg")},
-                    {id: 2, idView: require("../assets/images/car (3).jpg")},
-                    {id: 3, idView: require("../assets/images/car (4).jpg")},
-                    {id: 4, idView: require("../assets/images/car (5).jpg")}],
+                imagesbox: [{id: 0, idView: require("../assets/images/home_1.jpg")},
+                    {id: 1, idView: require("../assets/images/home_2.jpg")},
+                    {id: 2, idView: require("../assets/images/home_3.jpg")},
+                    {id: 3, idView: require("../assets/images/home_4.jpg")},
+                    {id: 4, idView: require("../assets/images/home_5.jpg")}],
                 note: {
-                    backgroundImage: "url(" + require("../assets/images/car (2).jpg") + ") ",
+                    backgroundImage: "url(" + require("../assets/images/home_1.jpg") + ") ",
                     backgroundPosition: "center center",
                     backgroundRepeat: "no-repeat",
                     backgroundSize: "cover"
@@ -109,8 +133,17 @@
             },false)
         },
         methods: {
-            commandHandler(cmd) {
-                if (cmd == 'logout') {
+            imgLoad(){
+                this.$nextTick(()=>{
+                    this.bannerHeight=this.$refs.bannerHeight[0].height
+                    console.log(this.$refs.bannerHeight[0].height);
+                })
+            },
+            menuClick(index){
+                this.$router.push(index);
+            },
+            userCommandHandler(cmd) {
+                if (cmd === 'logOut') {
                     this.$confirm('Whether to log out of the account?', 'prompt', {
                         confirmButtonText: 'Yes',
                         cancelButtonText: 'No',
@@ -126,14 +159,38 @@
                         });
                     });
                 }
+                if (cmd === 'sendMessage') {
+                    this.$router.push('sendmessage');
+                }
+                if (cmd === 'sendEmail') {
+                    this.$router.push('sendemail');
+                }
+                if (cmd === 'userInfo') {
+                    this.$router.push('userinfo');
+                }
+            },
+            visitorCommandHandler(cmd) {
+                if (cmd === 'register') {
+                    this.$router.push('register');
+                }
+                if (cmd === 'login') {
+                    this.$router.replace("/");
+                }
             }
         }
     }
 </script>
 
 <style>
+    .homeWelcome{
+        text-align: center;
+        font-size: 30px;
+        font-family: "Times New Roman";
+        color: #409eff;
+        padding-top: 50px;
+    }
     .homeHeader{
-        background-color: #03e2ff;
+        background-color: #409eff;
         display: flex;
         align-items: center;
         justify-content:space-between;
@@ -142,6 +199,10 @@
     }
     .homeHeader .title{
         font-size: 30px;
+        font-family: Calibri;
+        color: aliceblue;
+    }
+    .homeHeader .user{
         font-family: Calibri;
         color: aliceblue;
     }
