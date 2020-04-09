@@ -3,5 +3,7 @@ package com.team11.charityserver.mapper;
 import com.team11.charityserver.model.User;
 
 public interface UserMapper {
+    int insertSelective(User user);
+
     User loadUserByUsername(String username);
 }

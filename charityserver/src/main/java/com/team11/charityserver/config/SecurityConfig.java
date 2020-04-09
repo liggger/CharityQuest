@@ -43,6 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/doLogin", "/register", "/hello").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -94,7 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     public void onLogoutSuccess(HttpServletRequest req, HttpServletResponse resp, Authentication authentication) throws IOException, ServletException {
                         resp.setContentType("application/json;charset=utf-8");
                         PrintWriter out = resp.getWriter();
-                        out.write(new ObjectMapper().writeValueAsString(RespBean.ok("Logout successfully！")));
+                        out.write(new ObjectMapper().writeValueAsString(RespBean.ok("Log out successfully！")));
                         out.flush();
                         out.close();
                     }

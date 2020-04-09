@@ -10,23 +10,20 @@ import java.util.Collection;
 import java.util.List;
 
 public class User implements UserDetails{
+
     private Integer userId;
 
     private Integer roleId;
 
-    private String name;
-
-    private String telephone;
-
-    private String address;
-
     private String username;
+
+    private String gender;
 
     private String password;
 
-    private String mail;
+    private String telephone;
 
-    private String gender;
+    private String mail;
 
     private List<Role> roles;
 
@@ -46,28 +43,12 @@ public class User implements UserDetails{
         this.roleId = roleId;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getTelephone() {
         return telephone;
     }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getUsername() {

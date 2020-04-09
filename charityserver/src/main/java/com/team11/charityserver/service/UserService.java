@@ -21,4 +21,8 @@ public class UserService implements UserDetailsService{
         }
         return user;
     }
+
+    public void addUser(User user) {
+        System.out.println(userMapper.insertSelective(user));
+    }
 }
