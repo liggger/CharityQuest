@@ -1,5 +1,6 @@
 package com.team11.charityserver.controller;
 
+import com.team11.charityserver.model.Media;
 import com.team11.charityserver.model.Message;
 import com.team11.charityserver.model.Messagevo;
 import com.team11.charityserver.model.RespBean;
@@ -26,5 +27,11 @@ public class MessageController {
     public RespBean sendEmail(@RequestBody Messagevo messagevo) throws Exception {
         messageService.sendEmail(messagevo);
         return RespBean.ok("Send email successfully!");
+    }
+
+    @PostMapping("/twitter")
+    public RespBean sendTwitter(@RequestBody Media media) {
+        messageService.sendTwitter(media);
+        return RespBean.ok("Send twitter successfully!");
     }
 }

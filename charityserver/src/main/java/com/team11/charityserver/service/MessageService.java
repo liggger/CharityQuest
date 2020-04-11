@@ -7,6 +7,7 @@ import com.amazonaws.services.sns.AmazonSNSClientBuilder;
 import com.amazonaws.services.sns.model.MessageAttributeValue;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.PublishResult;
+import com.team11.charityserver.model.Media;
 import com.team11.charityserver.model.Messagevo;
 import org.springframework.stereotype.Service;
 
@@ -114,5 +115,9 @@ public class MessageService {
 
     public void sendEmail(Messagevo messagevo) throws Exception {
         this.sendEmailBySmtp(messagevo);
+    }
+
+    public void sendTwitter(Media media) {
+
     }
 }

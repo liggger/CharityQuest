@@ -22,7 +22,11 @@ public class UserService implements UserDetailsService{
         return user;
     }
 
-    public void addUser(User user) {
-        System.out.println(userMapper.insertSelective(user));
+    public Integer addUser(User user) {
+        return userMapper.insertSelective(user);
+    }
+
+    public Integer updateUser(User user) {
+        return userMapper.updateUser(user);
     }
 }

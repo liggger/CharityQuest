@@ -11,10 +11,6 @@ public class Charity implements Serializable {
 
     private String postcode;
 
-    private String bankAccountNumber;
-
-    private String bankAccountName;
-
     public Integer getCharityId() {
         return charityId;
     }
@@ -45,21 +41,5 @@ public class Charity implements Serializable {
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
-    }
-
-    public String getBankAccountNumber() {
-        return bankAccountNumber;
-    }
-
-    public void setBankAccountNumber(String bankAccountNumber) {
-        this.bankAccountNumber = bankAccountNumber;
-    }
-
-    public String getBankAccountName() {
-        return bankAccountName;
-    }
-
-    public void setBankAccountName(String bankAccountName) {
-        this.bankAccountName = bankAccountName;
     }
 }

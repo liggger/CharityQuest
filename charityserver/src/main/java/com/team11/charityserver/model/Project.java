@@ -1,5 +1,7 @@
 package com.team11.charityserver.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,15 +14,21 @@ public class Project implements Serializable {
 
     private String projectName;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date expireDate;
 
-    private double money;
+    private double targetMoney;
 
-    private int states;
+    private double totalMoney;
+
+    private String status;
 
     private String description;
+
+    private String link;
 
     public Integer getProjectId() {
         return projectId;
@@ -70,20 +78,28 @@ public class Project implements Serializable {
         this.expireDate = expireDate;
     }
 
-    public double getMoney() {
-        return money;
+    public double getTargetMoney() {
+        return targetMoney;
     }
 
-    public void setMoney(double money) {
-        this.money = money;
+    public void setTargetMoney(double targetMoney) {
+        this.targetMoney = targetMoney;
     }
 
-    public int getStates() {
-        return states;
+    public double getTotalMoney() {
+        return totalMoney;
     }
 
-    public void setStates(int states) {
-        this.states = states;
+    public void setTotalMoney(double totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDescription() {
@@ -92,5 +108,13 @@ public class Project implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
     }
 }

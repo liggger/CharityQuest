@@ -15,6 +15,31 @@
         select * from user where username=#{username}
     </select>
 
+    <update id="updateUser" parameterType="com.team11.charityserver.model.User" >
+        update user
+        <set>
+            <if test="roleId != null" >
+                roleId=#{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="username != null" >
+                username=#{username,jdbcType=VARCHAR},
+            </if>
+            <if test="gender != null" >
+                gender=#{gender,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password=#{password,jdbcType=VARCHAR},
+            </if>
+            <if test="telephone != null" >
+                telephone=#{telephone,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null" >
+                mail=#{mail,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where userId = #{userId,jdbcType=INTEGER}
+    </update>
+
     <insert id="insertSelective" parameterType="com.team11.charityserver.model.User" >
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides="," >

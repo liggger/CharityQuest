@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.team11.charityserver.mapper.DonationMapper">
+    <resultMap id="BaseResultMap" type="com.team11.charityserver.model.Donation">
+        <id column="donationId" property="donationId" jdbcType="INTEGER"/>
+        <id column="userId" property="userId" jdbcType="INTEGER"/>
+        <id column="projectId" property="projectId" jdbcType="INTEGER"/>
+        <result column="money" property="money" jdbcType="DOUBLE"/>
+        <result column="date" property="date" jdbcType="DATE"/>
+    </resultMap>
+
+    <select id="getAllDonations" resultMap="BaseResultMap">
+        select * from donation;
+    </select>
+
+    <select id="getAllDonationsByUserId" resultMap="BaseResultMap">
+    select * from donation where userId=#{userId};
+  </select>
+
+    <insert id="insertSelective" parameterType="com.team11.charityserver.model.Donation" >
+        insert into donation
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="donationId != null" >
+                donationId,
+            </if>
+            <if test="userId != null" >
+                userId,
+            </if>
+            <if test="projectId != null" >
+                projectId,
+            </if>
+            <if test="money != null" >
+                money,
+            </if>
+            <if test="date != null" >
+                date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="donationId != null" >
+                #{donationId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="projectId != null" >
+                #{projectId,jdbcType=INTEGER},
+            </if>
+            <if test="money != null" >
+                #{money,jdbcType=DOUBLE},
+            </if>
+            <if test="date != null" >
+                #{date,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+</mapper>

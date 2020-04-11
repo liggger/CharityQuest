@@ -1,5 +1,7 @@
 package com.team11.charityserver.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -12,8 +14,7 @@ public class Donation implements Serializable {
 
     private double money;
 
-    private int people;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     public Integer getDonationId() {
@@ -46,14 +47,6 @@ public class Donation implements Serializable {
 
     public void setMoney(double money) {
         this.money = money;
-    }
-
-    public int getPeople() {
-        return people;
-    }
-
-    public void setPeople(int people) {
-        this.people = people;
     }
 
     public Date getDate() {
