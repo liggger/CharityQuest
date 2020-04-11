@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-form ref="form" :model="payForm" label-width="100px" label-position="left">
+    <el-form ref="form" :model="payForm" label-width="130px" label-position="left">
       <el-form-item prop="price" label="Price" style="width: 400px">
         <el-input type="text" v-model="payForm.price" placeholder="10"></el-input>
       </el-form-item>
@@ -13,7 +13,7 @@
       <el-form-item prop="intent" label="Intent" style="width: 400px">
         <el-input type="text" v-model="payForm.intent" placeholder="sale"></el-input>
       </el-form-item>
-      <el-form-item prop="description" label="Pay Method" style="width: 400px">
+      <el-form-item prop="description" label="Pay Description" style="width: 400px">
         <el-input type="text" v-model="payForm.description" placeholder="Payment Description"></el-input>
       </el-form-item>
       <el-form-item style="width: 400px">
@@ -35,11 +35,6 @@
               method: 'paypal',
               intent: 'sale',
               description: 'Payment Description'
-              // price: '',
-              // currency: '',
-              // method: '',
-              // intent: '',
-              // description: ''
             }
           }
         },

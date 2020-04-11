@@ -13,6 +13,9 @@
                             <el-dropdown-item command="donationInfo">Donation Info</el-dropdown-item>
                             <el-dropdown-item command="sendMessage">Send Message</el-dropdown-item>
                             <el-dropdown-item command="sendEmail">Send Email</el-dropdown-item>
+                            <div v-if="user.roleId != 4">
+                                <el-dropdown-item command="applyCharity">Apply Charity</el-dropdown-item>
+                            </div>
                             <el-dropdown-item divided command="logOut">Log Out</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
@@ -56,8 +59,12 @@
                                 <i class="el-icon-location"></i>
                                 <span>get involved</span>
                             </template>
+                            <div v-if="user!=null && user.roleId==4">
+                                <el-menu-item index="publish">publish</el-menu-item>
+                            </div>
                             <el-menu-item index="donate">donate</el-menu-item>
-                            <el-menu-item index="fundraise">fundraise for us</el-menu-item>
+                            <el-menu-item index="projects">Projects</el-menu-item>
+                            <el-menu-item index="projectdetail">ProjectDetail</el-menu-item>
                         </el-submenu>
 
                         <el-submenu index="4">
@@ -159,14 +166,20 @@
                         });
                     });
                 }
+                if (cmd === 'userInfo') {
+                    this.$router.push('userinfo');
+                }
+                if (cmd === 'donationInfo') {
+                    this.$router.push('donationinfo');
+                }
                 if (cmd === 'sendMessage') {
                     this.$router.push('sendmessage');
                 }
                 if (cmd === 'sendEmail') {
                     this.$router.push('sendemail');
                 }
-                if (cmd === 'userInfo') {
-                    this.$router.push('userinfo');
+                if (cmd === 'applyCharity') {
+                    this.$router.push('applycharity')
                 }
             },
             visitorCommandHandler(cmd) {

@@ -4,7 +4,7 @@ import Login from '../views/Login.vue'
 import Home from "../views/Home";
 import Contact from "../views/contact/Contact";
 import Donate from "../views/get involved/Donate";
-import Fundraise from "../views/get involved/Fundraise";
+import Projects from "../views/get involved/Projects";
 import CharityInfo from "../views/about us/CharityInfo";
 import OurPeople from "../views/about us/OurPeople";
 import Announcement from "../views/news/Announcement";
@@ -14,6 +14,10 @@ import SendMessage from "../views/user/SendMessage";
 import UserInfo from "../views/user/UserInfo";
 import Register from "../views/user/Register";
 import SendEmail from "../views/user/SendEmail";
+import Publish from "../views/get involved/Publish";
+import ApplyCharity from "../views/user/ApplyCharity";
+import ProjectDetail from "../views/get involved/ProjectDetail";
+import DonationInfo from "../views/user/DonationInfo";
 
 Vue.use(VueRouter)
 
@@ -34,19 +38,19 @@ const routes = [
         component: Donate,
       },
       {
-        path: '/fundraise',
-        name: 'fundraise',
-        component: Fundraise,
+        path: '/publish',
+        name: 'publish',
+        component: Publish,
       },
       {
         path: '/charityinfo',
-        name: 'charityInfo',
+        name: 'Charity Info',
         component: CharityInfo,
       },
       {
-        path: '/fundraise',
-        name: 'fundraise',
-        component: Fundraise,
+        path: '/projects',
+        name: 'Projects',
+        component: Projects,
       },
       {
         path: '/ourpeople',
@@ -89,9 +93,24 @@ const routes = [
         component: UserInfo,
       },
       {
+        path: '/donationinfo',
+        name: 'Donation Info',
+        component: DonationInfo,
+      },
+      {
         path: '/register',
         name: 'register',
         component: Register,
+      },
+      {
+        path: '/applycharity',
+        name: 'applycharity',
+        component: ApplyCharity,
+      },
+      {
+        path: '/projectdetail',
+        name: 'Project Detail',
+        component: ProjectDetail,
       }
     ]
   }
